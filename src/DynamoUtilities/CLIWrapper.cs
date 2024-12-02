@@ -144,7 +144,10 @@ namespace Dynamo.Utilities
                                 //if we have started recieving valid data, start recording
                                 if (!string.IsNullOrWhiteSpace(line) && start)
                                 {
-                                    writer.WriteLine(line);
+                                    var base64EncodedBytes = Convert.FromBase64String(line);
+                                    var decodedData = Encoding.UTF8.GetString(base64EncodedBytes);
+
+                                    writer.WriteLine(decodedData);
                                 }
                             }
                         }
